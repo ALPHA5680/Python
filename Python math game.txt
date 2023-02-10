@@ -1,0 +1,60 @@
+﻿#auto-generated game with points and elmimination
+
+from random import *
+
+#define the players
+players = ["Jeffrey", "John", "Johnny", "James", "Jack", "Jamal"]
+
+#define some variables
+total_players = len(players)
+remaining_players = len(players)
+points = [2, 5, 2, 4, 1, 8]
+minimum = 1
+round_number = 1
+winner = 1
+winner_total_points = 0
+y = 0
+
+#game loop
+print(f"{len(players)} players:")
+
+#show players
+for i in range(0, len(players) - 1):
+  print(players[i], end = ", ")
+print(f"{players[len(players) - 1]}\n")
+
+while round_number < total_players:
+  remaining_players = len(players)
+  i = 0
+  
+  #points randomizer loop
+  while i <= len(points):
+    x = randint(0, 10)
+    points.pop()
+    points.append(x)
+    i += 1
+  points_total = sum(points)
+  points_number = len(points)
+  average = points_total/points_number
+  average = round(average)
+  max_points = max(points)
+  min_points = min(points)
+  winner_i = points.index(max_points)
+  winner = players[winner_i]
+  loser_i = points.index(min_points)
+  loser = players[loser_i]
+  winner_total_points += points[winner_i]
+  
+  #display stats
+  print(f"Round {round_number}: ")
+  print(f"{winner} wins with {points[winner_i]} points!")
+  print(f"{loser} loses with {points[loser_i]} points!")
+  print(f"Min points: {min_points}")
+  print(f"Max points: {max_points}")
+  print(f"Average score: {average}")
+  players.pop(loser_i)
+  points.pop(loser_i)
+  print(f"Remaining players: {remaining_players - 1}\n")
+  round_number += 1
+  
+print(f"Game ended! Winner: {players[0]} with {winner_total_points} points in total!")
